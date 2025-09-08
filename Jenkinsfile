@@ -17,37 +17,36 @@ pipeline {
 
         stage('Build Backend'){
             steps {
-                dir('app-backend') {
-                    sh 'mvn clean install'
+                dir('ms-upload') {
+                    sh './mvnw clean install'
                 }
             }
         }
 
         stage('Verify Jacoco Exec') {
             steps {
-                dir('app-backend/report/target') {
+                dir('ms-upload/target') {
                     sh 'ls -l'
                 }
             }
         }
     }
 
-    post{
+    post {
         success {
             script {
                 jacoco (
                     execPattern: '**/target/*.exec',
-                    classPattern: '**/target/*.classes',
-                    sourcePttern: '**/src/main/java',
+                    classPattern: '**/target/classes',
+                    sourcePattern: '**/src/main/java',
                     changeBuildStatus: true,
                     minimumLineCoverage: '85'
-                )            
+                )
             }
-
             echo 'Backend build completed successfully'
         }
 
-        failure{
+        failure {
             echo 'Backend build failed'
         }
     }
