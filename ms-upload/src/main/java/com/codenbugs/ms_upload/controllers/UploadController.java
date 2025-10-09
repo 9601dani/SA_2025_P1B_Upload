@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/uploads")
+@RequestMapping("/api/images")
 @AllArgsConstructor
 public class UploadController {
 
@@ -27,7 +27,7 @@ public class UploadController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/images")
+    @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> uploadImage(@RequestPart("file") MultipartFile file) throws NotCreatedException {
         String objectName = this.uploadFile(file, "images");
         Map<String, String> response = new HashMap<>();
