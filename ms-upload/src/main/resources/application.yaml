@@ -1,6 +1,9 @@
 server:
   port: 8091
 
+  servlet:
+    context-path: /api/images
+
 spring:
   servlet:
     multipart:

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("v1/images")
 @AllArgsConstructor
 public class UploadController {
 
@@ -38,6 +38,7 @@ public class UploadController {
     public String uploadFile(MultipartFile file, String path) throws NotCreatedException {
         return this.uploadService.uploadFile(file, path);
     }
+    
     @GetMapping("/images/base64")
     public ResponseEntity<?> getImageAsBase64(@RequestParam("fileKey") String fileKey) {
         try {

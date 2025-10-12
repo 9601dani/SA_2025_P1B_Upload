@@ -33,3 +33,5 @@ build/
 
 ### VS Code ###
 .vscode/
+.env
+**/src/main/resources/neural-hour-471916-n1-9d9d00a7b441.json
