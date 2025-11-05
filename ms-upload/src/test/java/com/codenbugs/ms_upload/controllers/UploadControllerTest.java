@@ -36,7 +36,7 @@ class UploadControllerTest {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "test-image.pdf", "application/pdf", "some-image-content".getBytes());
         when(uploadService.uploadFile(multipartFile, PATH)).thenReturn(FILENAME);
 
-        mockMvc.perform(multipart("/v1/uploads/documents")
+        mockMvc.perform(multipart("/v1/images/documents")
                         .file(multipartFile)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated());
@@ -47,7 +47,7 @@ class UploadControllerTest {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "test-image.png", "image/png", "some-image-content".getBytes());
         when(uploadService.uploadFile(multipartFile, PATH)).thenReturn(FILENAME);
 
-        mockMvc.perform(multipart("/v1/uploads/images")
+        mockMvc.perform(multipart("/v1/images/upload")
                         .file(multipartFile)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated());
@@ -70,7 +70,7 @@ class UploadControllerTest {
 
         when(uploadService.getFileAsBase64(fileKey)).thenReturn(base64Image);
 
-        mockMvc.perform(get("/v1/uploads/images/base64")
+        mockMvc.perform(get("/v1/images/images/base64")
                         .param("fileKey", fileKey))
                 .andExpect(status().isOk())
                 .andExpect(content().string(base64Image));
@@ -82,7 +82,7 @@ class UploadControllerTest {
 
         when(uploadService.getFileAsBase64(fileKey)).thenThrow(new IOException("Archivo no encontrado"));
 
-        mockMvc.perform(get("/v1/uploads/images/base64")
+        mockMvc.perform(get("/v1/images/images/base64")
                         .param("fileKey", fileKey))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("No se pudo cargar la imagen: Archivo no encontrado"));
